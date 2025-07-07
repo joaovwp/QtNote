@@ -40,5 +40,5 @@ O projeto foi desenvolvido com foco em simplicidade, usabilidade e eficiência, 
 ## Autor
 
 João Vitor Wagner Pereira  
-Email: joaovwp@gmail.com
+Email: joaovitorwagnerp@gmail.com
 
