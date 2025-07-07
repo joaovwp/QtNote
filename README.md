@@ -10,7 +10,8 @@ O projeto foi desenvolvido com foco em simplicidade, usabilidade e eficiência, 
 
 - Linguagem: C++
 - Framework: Qt 6
-- IDE: Qt Creator
+- Sistema de build: CMake
+- IDE recomendada: Qt Creator
 
 ## Como Compilar e Executar
 
@@ -18,16 +19,26 @@ O projeto foi desenvolvido com foco em simplicidade, usabilidade e eficiência, 
 
 - Qt 6 e Qt Creator instalados
 - Compilador C++ compatível (MinGW, GCC, Clang)
+- CMake instalado
 
 ### Passos
 
-1. Clone o repositório:
-`git clone https://github.com/joaovwp/QtNote.git`
+1. Clone o repositório:  
+   `git clone https://github.com/joaovwp/QtNote.git`
 
-2. Abra o arquivo `.pro` no Qt Creator.
-3. Configure o kit de compilação para o seu sistema.
-4. Compile o projeto (Build).
-5. Execute a aplicação (Run).
+2. Entre na pasta do projeto:  
+   `cd QtNote`
+
+3. Crie uma pasta para build e entre nela:  
+   `mkdir build && cd build`
+
+4. Gere os arquivos de build com CMake:  
+   `cmake ..`
+
+5. Compile o projeto:  
+   `cmake --build .`
+
+6. Execute a aplicação gerada.
 
 ## Funcionalidades Principais
 
@@ -41,4 +52,3 @@ O projeto foi desenvolvido com foco em simplicidade, usabilidade e eficiência, 
 
 João Vitor Wagner Pereira  
 Email: joaovitorwagnerp@gmail.com
-
