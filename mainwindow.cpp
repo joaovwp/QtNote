@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QInputDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -67,6 +69,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
 void MainWindow::criarNota()
 {
     QString titulo = ui->lineEdit_titulo->text();
@@ -74,14 +78,13 @@ void MainWindow::criarNota()
 
     if (titulo.isEmpty())
     {
+        QMessageBox::warning(this, "Aviso", "Insira um título");
         return;
     }
 
     gerenciador.adicionarNota(titulo, conteudo);
-
     ui->lineEdit_titulo->clear();
     ui->textEdit_criar->clear();
-
     atualizarInterface();
 }
 
@@ -106,30 +109,6 @@ void MainWindow::editarNotaAtiva()
     }
 
     gerenciador.editarNota(notaAtivaSelecionada, novoTitulo, novoConteudo);
-    atualizarInterface();
-}
-
-void MainWindow::removerNotaAtiva()
-{
-    if (!notaAtivaSelecionada)
-    {
-        return;
-    }
-
-    gerenciador.removerNota(notaAtivaSelecionada);
-    notaAtivaSelecionada = nullptr;
-    atualizarInterface();
-}
-
-void MainWindow::removerNotaFinalizada()
-{
-    if (!notaFinalizadaSelecionada)
-    {
-        return;
-    }
-
-    gerenciador.removerNota(notaFinalizadaSelecionada);
-    notaFinalizadaSelecionada = nullptr;
     atualizarInterface();
 }
 
@@ -159,23 +138,44 @@ void MainWindow::selecionarNotaAtiva(Nota *nota)
     }
 }
 
+void MainWindow::removerNotaAtiva()
+{
+    if (!notaAtivaSelecionada)
+    {
+        return;
+    }
+
+    gerenciador.removerNota(notaAtivaSelecionada);
+    notaAtivaSelecionada = nullptr;
+    atualizarInterface();
+}
+
+
 void MainWindow::selecionarNotaFinalizada(Nota *nota)
 {
     notaFinalizadaSelecionada = nota;
 
     if (nota)
     {
-        QString texto = nota->getConteudo();
-        texto = texto.toHtmlEscaped();
-        texto.replace("\n", "<br>");
-
-        QString conteudoRiscado = "<s>" + texto + "</s>";
-        ui->textEdit_finalizados->setHtml(conteudoRiscado);
+        QString texto = nota->getConteudo().toHtmlEscaped().replace("\n", "<br>");
+        ui->textEdit_finalizados->setHtml("<s>" + texto + "</s>");
     }
     else
     {
         ui->textEdit_finalizados->clear();
     }
+}
+
+void MainWindow::removerNotaFinalizada()
+{
+    if (!notaFinalizadaSelecionada)
+    {
+        return;
+    }
+
+    gerenciador.removerNota(notaFinalizadaSelecionada);
+    notaFinalizadaSelecionada = nullptr;
+    atualizarInterface();
 }
 
 void MainWindow::atualizarInterface()

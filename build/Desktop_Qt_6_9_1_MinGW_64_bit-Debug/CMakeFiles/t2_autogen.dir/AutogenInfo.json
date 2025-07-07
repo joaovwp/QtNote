@@ -432,8 +432,7 @@
 		[ "C:/Users/joaov/Desktop/t2/gerenciadornotas.cpp", "MU", null ],
 		[ "C:/Users/joaov/Desktop/t2/listanotawidget.cpp", "MU", null ],
 		[ "C:/Users/joaov/Desktop/t2/main.cpp", "MU", null ],
-		[ "C:/Users/joaov/Desktop/t2/mainwindow.cpp", "MU", null ],
-		[ "C:/Users/joaov/Desktop/t2/nota.cpp", "MU", null ]
+		[ "C:/Users/joaov/Desktop/t2/mainwindow.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

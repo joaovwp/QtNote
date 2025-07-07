@@ -3,77 +3,6 @@
 #include <QFile>
 #include <QTextStream>
 
-bool GerenciadorNotas::salvar(const QString &caminhoArquivo) {
-    QFile arquivo(caminhoArquivo);
-
-    if (!arquivo.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        return false;
-    }
-
-    QTextStream out(&arquivo);
-
-    out << "Ativas\n";
-    for (Nota *nota : notasAtivas) {
-        QString conteudo = nota->getConteudo();
-        conteudo.replace("\n", "\\n");
-        out << nota->getTitulo() << "\n";
-        out << conteudo << "\n";
-    }
-
-    out << "Finalizadas\n";
-    for (Nota *nota : notasFinalizadas) {
-        QString conteudo = nota->getConteudo();
-        conteudo.replace("\n", "\\n");
-        out << nota->getTitulo() << "\n";
-        out << conteudo << "\n";
-    }
-
-    arquivo.close();
-    return true;
-}
-
-bool GerenciadorNotas::carregar(const QString &caminhoArquivo) {
-    QFile arquivo(caminhoArquivo);
-
-    if (!arquivo.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return false;
-    }
-
-    qDeleteAll(notasAtivas);
-    qDeleteAll(notasFinalizadas);
-    notasAtivas.clear();
-    notasFinalizadas.clear();
-
-    QTextStream in(&arquivo);
-    QString linha = in.readLine();
-    QList<Nota*> *listaAtual = nullptr;
-
-    while (!linha.isNull()) {
-        if (linha == "Ativas") {
-            listaAtual = &notasAtivas;
-        }
-        else if (linha == "Finalizadas") {
-            listaAtual = &notasFinalizadas;
-        }
-        else if (listaAtual) {
-            QString titulo = linha;
-            QString conteudo = in.readLine();
-
-            if (conteudo.isNull()) {
-                break;
-            }
-
-            conteudo.replace("\\n", "\n");
-            listaAtual->append(new Nota(titulo, conteudo));
-        }
-
-        linha = in.readLine();
-    }
-
-    arquivo.close();
-    return true;
-}
-
 QList<Nota*> GerenciadorNotas::getAtivas() const {
     return notasAtivas;
 }
@@ -81,6 +10,7 @@ QList<Nota*> GerenciadorNotas::getAtivas() const {
 QList<Nota*> GerenciadorNotas::getFinalizadas() const {
     return notasFinalizadas;
 }
+
 
 void GerenciadorNotas::adicionarNota(const QString &titulo, const QString &conteudo) {
     Nota *nova = new Nota(titulo, conteudo);
@@ -111,4 +41,75 @@ void GerenciadorNotas::editarNota(Nota *nota, const QString &novoTitulo, const Q
         nota->setTitulo(novoTitulo);
         nota->setConteudo(novoConteudo);
     }
+}
+
+bool GerenciadorNotas::salvar(const QString &caminho) {
+    QFile f(caminho);
+
+    if (!f.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    QTextStream out(&f);
+
+    out << "Ativas\n";
+    for (Nota *nota : notasAtivas) {
+        QString conteudo = nota->getConteudo();
+        conteudo.replace("\n", "\\n");
+        out << nota->getTitulo() << "\n";
+        out << conteudo << "\n";
+    }
+
+    out << "Finalizadas\n";
+    for (Nota *nota : notasFinalizadas) {
+        QString conteudo = nota->getConteudo();
+        conteudo.replace("\n", "\\n");
+        out << nota->getTitulo() << "\n";
+        out << conteudo << "\n";
+    }
+
+    f.close();
+    return true;
+}
+
+bool GerenciadorNotas::carregar(const QString &caminho) {
+    QFile f(caminho);
+
+    if (!f.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return false;
+    }
+
+    qDeleteAll(notasAtivas);
+    qDeleteAll(notasFinalizadas);
+    notasAtivas.clear();
+    notasFinalizadas.clear();
+
+    QTextStream in(&f);
+    QString linha = in.readLine();
+    QList<Nota*> *listaAtual = nullptr;
+
+    while (!linha.isNull()) {
+        if (linha == "Ativas") {
+            listaAtual = &notasAtivas;
+        }
+        else if (linha == "Finalizadas") {
+            listaAtual = &notasFinalizadas;
+        }
+        else if (listaAtual) {
+            QString titulo = linha;
+            QString conteudo = in.readLine();
+
+            if (conteudo.isNull()) {
+                break;
+            }
+
+            conteudo.replace("\\n", "\n");
+            listaAtual->append(new Nota(titulo, conteudo));
+        }
+
+        linha = in.readLine();
+    }
+
+    f.close();
+    return true;
 }

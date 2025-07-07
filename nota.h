@@ -5,13 +5,14 @@
 
 class Nota {
 public:
-    Nota(const QString &titulo, const QString &conteudo);
+    Nota(const QString &titulo, const QString &conteudo)
+        : titulo(titulo), conteudo(conteudo) {}
 
-    QString getTitulo() const;
-    QString getConteudo() const;
+    QString getTitulo() const { return titulo; }
+    QString getConteudo() const { return conteudo; }
 
-    void setTitulo(const QString &novoTitulo);
-    void setConteudo(const QString &novoConteudo);
+    void setTitulo(const QString &novoTitulo) { titulo = novoTitulo; }
+    void setConteudo(const QString &novoConteudo) { conteudo = novoConteudo; }
 
 private:
     QString titulo;

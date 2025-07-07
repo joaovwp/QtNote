@@ -609,7 +609,6 @@ t2_autogen/timestamp: \
 	C:/Users/joaov/Desktop/t2/main.cpp \
 	C:/Users/joaov/Desktop/t2/mainwindow.cpp \
 	C:/Users/joaov/Desktop/t2/mainwindow.h \
-	C:/Users/joaov/Desktop/t2/nota.cpp \
 	C:/Users/joaov/Desktop/t2/nota.h \
 	C:/Users/joaov/Desktop/t2/mainwindow.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

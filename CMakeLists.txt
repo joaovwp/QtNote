@@ -27,7 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
         gerenciadornotas.h gerenciadornotas.cpp
         nota.h
-        nota.cpp
+
         imagens.qrc
 
 
