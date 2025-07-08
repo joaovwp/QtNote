@@ -23,7 +23,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(t2
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        listanotawidget.h listanotawidget.cpp listanotawidget.ui
+        listanotawidget.h listanotawidget.cpp
 
         gerenciadornotas.h gerenciadornotas.cpp
         nota.h

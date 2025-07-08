@@ -192,7 +192,7 @@ build t2_autogen_timestamp_deps: phony
 #############################################
 # Utility command for t2_autogen
 
-build t2_autogen: phony CMakeFiles/t2_autogen t2_autogen/include/ui_mainwindow.h t2_autogen/include/ui_listanotawidget.h t2_autogen/timestamp t2_autogen/mocs_compilation.cpp t2_autogen_timestamp_deps
+build t2_autogen: phony CMakeFiles/t2_autogen t2_autogen/include/ui_mainwindow.h t2_autogen/timestamp t2_autogen/mocs_compilation.cpp t2_autogen_timestamp_deps
 
 
 #############################################
@@ -218,7 +218,7 @@ build t2_autogen/EWIEGA46WW/qrc_imagens.cpp | ${cmake_ninja_workdir}t2_autogen/E
 #############################################
 # Phony custom command for CMakeFiles\t2_autogen
 
-build CMakeFiles/t2_autogen t2_autogen/include/ui_mainwindow.h t2_autogen/include/ui_listanotawidget.h | ${cmake_ninja_workdir}CMakeFiles/t2_autogen ${cmake_ninja_workdir}t2_autogen/include/ui_mainwindow.h ${cmake_ninja_workdir}t2_autogen/include/ui_listanotawidget.h: phony t2_autogen/timestamp || t2_autogen_timestamp_deps
+build CMakeFiles/t2_autogen t2_autogen/include/ui_mainwindow.h | ${cmake_ninja_workdir}CMakeFiles/t2_autogen ${cmake_ninja_workdir}t2_autogen/include/ui_mainwindow.h: phony t2_autogen/timestamp || t2_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.
