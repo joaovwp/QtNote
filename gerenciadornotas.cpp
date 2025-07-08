@@ -3,14 +3,6 @@
 #include <QFile>
 #include <QTextStream>
 
-QList<Nota*> GerenciadorNotas::getAtivas() const {
-    return notasAtivas;
-}
-
-QList<Nota*> GerenciadorNotas::getFinalizadas() const {
-    return notasFinalizadas;
-}
-
 
 void GerenciadorNotas::adicionarNota(const QString &titulo, const QString &conteudo) {
     Nota *nova = new Nota(titulo, conteudo);
@@ -27,21 +19,33 @@ void GerenciadorNotas::removerNota(Nota *nota) {
     delete nota;
 }
 
-void GerenciadorNotas::finalizarNota(Nota *nota) {
-    if (!nota) {
-        return;
-    }
-
-    notasAtivas.removeAll(nota);
-    notasFinalizadas.append(nota);
-}
-
 void GerenciadorNotas::editarNota(Nota *nota, const QString &novoTitulo, const QString &novoConteudo) {
     if (nota) {
         nota->setTitulo(novoTitulo);
         nota->setConteudo(novoConteudo);
     }
 }
+
+void GerenciadorNotas::finalizarNota(Nota *nota) {
+    if (!nota) {
+        return;
+    }
+    notasAtivas.removeAll(nota);
+    notasFinalizadas.append(nota);
+}
+
+QList<Nota*> GerenciadorNotas::getAtivas() const {
+    return notasAtivas;
+}
+
+QList<Nota*> GerenciadorNotas::getFinalizadas() const {
+    return notasFinalizadas;
+}
+
+
+
+
+
 
 bool GerenciadorNotas::salvar(const QString &caminho) {
     QFile f(caminho);
@@ -53,18 +57,18 @@ bool GerenciadorNotas::salvar(const QString &caminho) {
     QTextStream out(&f);
 
     out << "Ativas\n";
-    for (Nota *nota : notasAtivas) {
-        QString conteudo = nota->getConteudo();
+    for (int i = 0; i < notasAtivas.size(); ++i) {
+        QString conteudo = notasAtivas[i]->getConteudo();
         conteudo.replace("\n", "\\n");
-        out << nota->getTitulo() << "\n";
+        out << notasAtivas[i]->getTitulo() << "\n";
         out << conteudo << "\n";
     }
 
     out << "Finalizadas\n";
-    for (Nota *nota : notasFinalizadas) {
-        QString conteudo = nota->getConteudo();
+    for (int i = 0; i < notasFinalizadas.size(); ++i) {
+        QString conteudo = notasFinalizadas[i]->getConteudo();
         conteudo.replace("\n", "\\n");
-        out << nota->getTitulo() << "\n";
+        out << notasFinalizadas[i]->getTitulo() << "\n";
         out << conteudo << "\n";
     }
 

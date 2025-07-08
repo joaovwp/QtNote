@@ -10,6 +10,7 @@ ListaNotaWidget::ListaNotaWidget(QWidget *parent) : QWidget(parent) {
 }
 
 void ListaNotaWidget::atualizarNotas(const QList<Nota*> &novasNotas) {
+
     listWidget->clear();
     notas = novasNotas;
 

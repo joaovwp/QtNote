@@ -16,6 +16,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private slots:
+
     void criarNota();
     void editarNotaAtiva();
     void removerNotaAtiva();

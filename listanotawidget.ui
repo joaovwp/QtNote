@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>ListaNotaWidget</class>
  <widget class="QWidget" name="ListaNotaWidget">
+  <property name="enabled">
+   <bool>false</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
